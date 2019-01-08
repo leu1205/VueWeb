@@ -4,8 +4,7 @@
         p.lead.text-center Team members
         .card
             .card-body
-                h5.card-title ID：#{employee_id}
-                form#editForm.needs-validation(novalidate)
+                form#createForm.needs-validation(novalidate)
                     .form-group
                         label(for="InputName").col-form-label Name
                         Input(type="text" name="eName" placeholder="Your Name" required)#InputName.form-control
@@ -25,17 +24,17 @@
                         label(for="InputContent").col-form-label Content
                         textarea(name="content" placeholder="The man is so lazy that he leaves nothing." cols="30" rows="4" required)#InputContent.form-control
                         .invalid-feedback.font-italic.font-weight-bold Please provide a message.
-                    a(href="/staff").btn.btn-primary.offset-sm-10 Back List
-                    button(type="submit").btn.btn-success.ml-sm-2 Edit
+                    .d-flex.justify-content-end
+                        a(href="/staff").btn.btn-primary Back List
+                        button(type="submit").btn.btn-success.ml-sm-2 Create
 </template>
 
 <script>
 export default {
     head: {
-        script: [
-            {src:"edit.js"}
+        script:[
+            {src:'/javascript/employees/create.js'}
         ]
     }
 }
 </script>
-

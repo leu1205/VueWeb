@@ -1,6 +1,6 @@
 $(document).ready(function(){
-    var item6 = $('#menu-item-6 a');
-    var item7 = $('#menu-item-7 a');
+    /* var item6 = $('#menu-item-6 a');
+    var item7 = $('#menu-item-7 a'); */
     
     $('[href="'+this.location.pathname+'"]').addClass('active');
     $('li.nav-item').on('click', function () {
@@ -8,7 +8,7 @@ $(document).ready(function(){
         $(this).addClass('active');
     });
     
-    if(item6.text() === "SIGN UP"){
+    /*if(item6.text() === "SIGN UP"){
         item6.attr({'data-toggle':"modal", 'data-target':"#signupModal"});
     } else {
         item6.removeAttr('data-toggle data-target');
@@ -25,9 +25,9 @@ $(document).ready(function(){
             });
             location.reload();
         });
-    }
+    }*/
 
-    $('#signupForm').submit(async function (e) {
+    /*$('#signupForm').submit(async function (e) {
         e.preventDefault();
         if($(this)[0].checkValidity() === false){
             e.stopPropagation();
@@ -50,9 +50,9 @@ $(document).ready(function(){
                 }
             });
         }
-    });
+    });*/
 
-    $('#loginForm').submit(async function(e) {
+    /*$('#loginForm').submit(async function(e) {
         e.preventDefault();
         if($(this)[0].checkValidity() === false){
             e.stopPropagation();
@@ -75,5 +75,5 @@ $(document).ready(function(){
                 }
             });
         }
-    });
+    });*/
 });

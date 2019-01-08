@@ -7,9 +7,10 @@
                 form#cmForm.needs-validation(novalidate)
                     .form-group.row
                         label(for="InputName").col-sm-1.col-form-label Name
-                        div
+                        div(v-if="loginStatus === false")
                             input(name = "cName", type="text", placeholder="Name" required)#InputName.form-control.col-sm-9
                             .invalid-feedback.font-italic.font-weight-bold Please choose a username.
+                        div(v-else).col-form-label {{ userName }}
                     .form-group
                         label(for="InputText") Content
                         textarea(name = "content", cols="30", rows="4", placeholder="Content" required)#InputText.form-control
@@ -27,8 +28,16 @@
 export default {
     head: {
         script: [
-            {src:"comment.js"}
+            {src:"javascript/comment.js"}
         ]
+    },
+    computed: {
+        loginStatus() {
+            return this.$store.state.loginStatus
+        },
+        userName() {
+            return this.$store.state.userName
+        }
     }
 }
 </script>

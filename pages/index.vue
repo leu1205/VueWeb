@@ -29,9 +29,9 @@
 export default {
 	head: {
     	script: [
-    		{ src: 'index.js'}
+    		{ src: 'javascript/index.js'}
     	]
-  	},
+	  },
   	data: function() {
     	return {
       		section: [
@@ -48,7 +48,6 @@ export default {
 section{
     text-align: center;
     padding-top: 1%;
-    
 }
 
 section form{

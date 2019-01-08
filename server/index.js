@@ -7,6 +7,19 @@ const app = new Koa()
 const host = process.env.HOST || '127.0.0.1'
 const port = process.env.PORT || 3000
 
+/* ↓---its added by me---↓ */
+const bodyParser = require('koa-bodyparser');
+const Router = require('koa-router');
+const session = require('koa-session');
+const employees = require('./routes/employees');
+const auth = require('./routes/auth');
+const mongoose = require('mongoose');
+const router = new Router;
+mongoose.connect("mongodb://localhost:27017/koaWeb", {
+    useNewUrlParser: true
+});
+/* ↑---its added by me---↑ */
+
 // Import and Set Nuxt.js options
 let config = require('../nuxt.config.js')
 config.dev = !(app.env === 'production')
@@ -21,9 +34,15 @@ async function start() {
     await builder.build()
   }
 
-  app.use(ctx => {
+  app.keys = [config.env.cookieSecret];
+  app.use(bodyParser()); 
+  app.use(session(config.env.session, app));
+  router.use(employees.routes(), employees.allowedMethods());
+  router.use(auth.routes(), auth.allowedMethods());
+  app.use(router.routes());
+  app.use( ctx => {
     ctx.status = 200 // koa defaults to 404 when it sees that status is unset
-
+    ctx.req.session = ctx.session;
     return new Promise((resolve, reject) => {
       ctx.res.on('close', resolve)
       ctx.res.on('finish', resolve)
@@ -33,7 +52,7 @@ async function start() {
       })
     })
   })
-
+  
   app.listen(port, host)
   consola.ready({
     message: `Server listening on http://${host}:${port}`,
